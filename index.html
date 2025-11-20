@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T5 Study Guide: Search & Seizure Test</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f9;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #0056b3;
+            padding-bottom: 20px;
+        }
+        h1 {
+            color: #0056b3;
+        }
+        .quiz-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .question-block {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .question-text {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+        .options {
+            list-style-type: none;
+            padding: 0;
+        }
+        .options li {
+            margin: 8px 0;
+        }
+        .option-btn {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 10px 15px;
+            background-color: #e9ecef;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            font-size: 1em;
+        }
+        .option-btn:hover {
+            background-color: #dde2e6;
+        }
+        .correct {
+            background-color: #d4edda !important;
+            border-color: #c3e6cb !important;
+            color: #155724;
+        }
+        .incorrect {
+            background-color: #f8d7da !important;
+            border-color: #f5c6cb !important;
+            color: #721c24;
+        }
+        .feedback {
+            margin-top: 10px;
+            font-size: 0.9em;
+            font-style: italic;
+            display: none;
+        }
+        #score-area {
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #e2e6ea;
+            border-radius: 8px;
+            display: none;
+        }
+        .citation {
+            font-size: 0.8em;
+            color: #666;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>T5 Study Guide Practice Test</h1>
+    <p>Based on PA Search & Seizure Laws and Procedures</p>
+</header>
+
+<div class="quiz-container" id="quiz">
+    </div>
+
+<div id="score-area"></div>
+
+<script>
+    const questions = [
+        {
+            q: "According to the study guide, what are the four sources of law governing police powers to search and seize?",
+            options: [
+                "A. U.S. Constitution, PA Constitution, Case Law, and Statutory Law (PA Rules of Criminal Procedure)",
+                "B. U.S. Constitution, Bill of Rights, Magna Carta, and Local Ordinances",
+                "C. PA Constitution, Federal Statutes, Civil Law, and Administrative Code",
+                "D. The 4th Amendment, The 5th Amendment, The 6th Amendment, and The 14th Amendment"
+            ],
+            answer: 0,
+            [cite_start]cite: "[cite: 2, 3, 4, 5, 6]"
+        },
+        {
+            q: "What is the definition of Probable Cause provided in the text?",
+            options: [
+                "A. A hunch that a crime has occurred based on officer experience.",
+                "B. Facts and circumstances leading a reasonable person to believe a crime was committed and items subject to seizure are present.",
+                "C. Proof beyond a reasonable doubt that a suspect committed a specific crime.",
+                "D. Any evidence sufficient to obtain a warrant from a magistrate."
+            ],
+            answer: 1,
+            [cite_start]cite: "[cite: 10, 11]"
+        },
+        {
+            q: "Regarding legal standing during traffic stops, which statement is true?",
+            options: [
+                "A. Only the driver is considered seized.",
+                "B. Passengers are free to leave immediately and are not seized.",
+                "C. Passengers are seized and therefore may challenge the constitutionality of the stop.",
+                "D. Passengers only have standing if they own the vehicle."
+            ],
+            answer: 2,
+            [cite_start]cite: "[cite: 16, 18]"
+        },
+        {
+            q: "In Katz v. U.S. (1967), the Supreme Court established that:",
+            options: [
+                "A. Privacy is determined by property ownership.",
+                "B. Privacy travels with the person (Reasonable Expectation of Privacy).",
+                "C. Wiretapping is always legal without a warrant.",
+                "D. Privacy only applies inside a private residence."
+            ],
+            answer: 1,
+            [cite_start]cite: "[cite: 20, 22]"
+        },
+        {
+            q: "Which of the following is NOT considered 'curtilage'?",
+            options: [
+                "A. A detached garage.",
+                "B. A garden adjacent to the home.",
+                "C. A shed used for home storage.",
+                "D. An open field with a 'No Trespassing' sign and a locked gate."
+            ],
+            answer: 3,
+            [cite_start]cite: "[cite: 35, 36, 145]"
+        },
+        {
+            q: "What is the primary purpose of the Exclusionary Rule (Mapp v. Ohio)?",
+            options: [
+                "A. To punish criminals.",
+                "B. To deter police misconduct.",
+                "C. To reduce court case backlogs.",
+                "D. To protect judges from liability."
+            ],
+            answer: 1,
+            [cite_start]cite: "[cite: 44]"
+        },
+        {
+            q: "Does Pennsylvania recognize the 'Good Faith Exception' to the Exclusionary Rule?",
+            options: [
+                "A. Yes, in all cases.",
+                "B. Yes, but only for traffic stops.",
+                "C. No, PA has NO Good Faith exception.",
+                "D. No, unless it involves a federal agent."
+            ],
+            answer: 2,
+            [cite_start]cite: "[cite: 46]"
+        },
+        {
+            q: "Under the 'Inevitable Discovery' exception (Nix v. Williams), evidence is admissible if:",
+            options: [
+                "A. The officer acted in good faith.",
+                "B. The police can prove the illegally seized evidence would have been discovered anyway.",
+                "C. The evidence is a weapon used in a violent crime.",
+                "D. The suspect confesses to the crime before trial."
+            ],
+            answer: 1,
+            [cite_start]cite: "[cite: 48, 49]"
+        },
+        {
+            q: "During a vehicle search incident to arrest, which area is PROHIBITED from being searched without a warrant or further probable cause?",
+            options: [
+                "A. The glove box.",
+                "B. Under the seats.",
+                "C. The trunk.",
+                "D. The center console."
+            ],
+            answer: 2,
+            [cite_start]cite: "[cite: 63, 66]"
+        },
+        {
+            q: "What are the three parts of the Plain View Doctrine test in PA?",
+            options: [
+                "A. 1. Item in plain view, 2. Incriminating nature apparent, 3. Police have lawful right of access.",
+                "B. 1. Item in plain view, 2. Officer has a warrant, 3. Item is a weapon.",
+                "C. 1. Item is contraband, 2. Suspect admits ownership, 3. Officer is on duty.",
+                "D. 1. Item is visible from street, 2. Item is valuable, 3. Officer suspects crime."
+            ],
+            answer: 0,
+            [cite_start]cite: "[cite: 71, 72, 73, 74]"
+        },
+        {
+            q: "Is 'Plain Smell' alone sufficient for a seizure or frisk?",
+            options: [
+                "A. Yes, if the officer is trained.",
+                "B. Yes, for marijuana specifically.",
+                "C. No, plain smell is NOT enough.",
+                "D. No, unless the suspect runs away."
+            ],
+            answer: 2,
+            [cite_start]cite: "[cite: 83]"
+        },
+        {
+            q: "To conduct a Stop and Frisk, an officer requires:",
+            options: [
+                "A. Probable cause that a crime occurred.",
+                "B. A hunch that the person looks suspicious.",
+                "C. Reasonable suspicion of criminal activity AND articulable facts that the person is armed & dangerous.",
+                "D. Consent from the individual."
+            ],
+            answer: 2,
+            [cite_start]cite: "[cite: 85, 86]"
+        },
+        {
+            q: "Regarding vehicle exigency, how does the PA rule differ from the Federal rule?",
+            options: [
+                "A. PA follows the federal rule exactly.",
+                "B. In PA, mobility alone equals exigency.",
+                "C. In PA, there is no vehicle exception at all.",
+                "D. PA requires Probable Cause + Exigency OTHER than mobility; it does not recognize the federal Automobile Exception."
+            ],
+            answer: 3,
+            [cite_start]cite: "[cite: 106, 107]"
+        },
+        {
+            q: "If one spouse is present and consents to a search, but the other spouse is present and refuses, is the consent valid?",
+            options: [
+                "A. Yes, one valid consent is enough.",
+                "B. No, if both are present and one says no, there is NO consent.",
+                "C. Yes, provided the consenting spouse owns the property.",
+                "D. It depends on who called the police."
+            ],
+            answer: 1,
+            [cite_start]cite: "[cite: 131]"
+        },
+        {
+            q: "Can a landlord give consent to search a tenant's premises?",
+            options: [
+                "A. Yes, because they own the building.",
+                "B. Yes, if the tenant is behind on rent.",
+                "C. No, a landlord cannot consent to a tenant's premises.",
+                "D. Only if the police have a warrant for the landlord."
+            ],
+            answer: 2,
+            [cite_start]cite: "[cite: 134]"
+        },
+        {
+            q: "What is the 'Four Corners Rule' regarding search warrants (Rule 203)?",
+            options: [
+                "A. The warrant must be signed in all four corners of the paper.",
+                "B. Probable Cause must be based solely on facts in the written application; no oral statements allowed.",
+                "C. Police must search all four corners of a room.",
+                "D. The warrant is valid for 4 days."
+            ],
+            answer: 1,
+            [cite_start]cite: "[cite: 147, 148]"
+        },
+        {
+            q: "When executing a search warrant, how much time do police generally have to execute it?",
+            options: [
+                "A. 24 hours.",
+                "B. Within 2 days (48 hours).",
+                "C. 1 week.",
+                "D. Until the investigation is closed."
+            ],
+            answer: 1,
+            [cite_start]cite: "[cite: 150]"
+        },
+        {
+            q: "Which of the following is NOT a valid purpose of an Inventory Search?",
+            options: [
+                "A. To find hidden evidence of a crime.",
+                "B. To protect the owner's property.",
+                "C. To protect police from theft claims.",
+                "D. To protect police from danger."
+            ],
+            answer: 0,
+            [cite_start]cite: "[cite: 137, 138, 139, 140]"
+        },
+        {
+            q: "Regarding the frisk of occupants, what did the 'Grahame case' establish?",
+            options: [
+                "A. All passengers in a drug car are dangerous.",
+                "B. There is NO legal presumption that 'guns follow drugs.'",
+                "C. Police can strip search anyone suspected of holding drugs.",
+                "D. Drugs are always followed by guns."
+            ],
+            answer: 1,
+            [cite_start]cite: "[cite: 149, 150]"
+        },
+        {
+            q: "Under Rule 205, execution of a search warrant is generally permitted during which times?",
+            options: [
+                "A. 8 AM to 8 PM.",
+                "B. Anytime (24/7).",
+                "C. 6 AM to 10 PM (Daytime).",
+                "D. Sunrise to Sunset."
+            ],
+            answer: 2,
+            [cite_start]cite: "[cite: 150]"
+        }
+    ];
+
+    function loadQuiz() {
+        const quizContainer = document.getElementById('quiz');
+        let output = [];
+
+        questions.forEach((currentQuestion, questionNumber) => {
+            let optionsHtml = [];
+            currentQuestion.options.forEach((option, index) => {
+                optionsHtml.push(
+                    `<li>
+                        <button class="option-btn" onclick="checkAnswer(this, ${questionNumber}, ${index})">
+                            ${option}
+                        </button>
+                    </li>`
+                );
+            });
+
+            output.push(
+                `<div class="question-block">
+                    <div class="question-text">${questionNumber + 1}. ${currentQuestion.q}</div>
+                    <ul class="options">
+                        ${optionsHtml.join('')}
+                    </ul>
+                    <div class="feedback" id="feedback-${questionNumber}"></div>
+                </div>`
+            );
+        });
+
+        quizContainer.innerHTML = output.join('');
+    }
+
+    let score = 0;
+    let answeredCount = 0;
+
+    function checkAnswer(btn, questionIndex, optionIndex) {
+        const question = questions[questionIndex];
+        const feedbackEl = document.getElementById(`feedback-${questionIndex}`);
+        const parentUl = btn.closest('ul');
+        const allBtns = parentUl.querySelectorAll('button');
+
+        // Disable all buttons for this question
+        allBtns.forEach(button => button.disabled = true);
+
+        if (optionIndex === question.answer) {
+            btn.classList.add('correct');
+            feedbackEl.innerHTML = `<span style="color:green;">Correct!</span> <span class="citation">${question.cite}</span>`;
+            score++;
+        } else {
+            btn.classList.add('incorrect');
+            // Highlight the correct answer
+            allBtns[question.answer].classList.add('correct');
+            feedbackEl.innerHTML = `<span style="color:red;">Incorrect.</span> The correct answer was option ${['A','B','C','D'][question.answer]}. <span class="citation">${question.cite}</span>`;
+        }
+
+        feedbackEl.style.display = 'block';
+        answeredCount++;
+
+        if (answeredCount === questions.length) {
+            showFinalScore();
+        }
+    }
+
+    function showFinalScore() {
+        const scoreArea = document.getElementById('score-area');
+        const percentage = Math.round((score / questions.length) * 100);
+        
+        let message = "";
+        if (percentage >= 90) message = "Excellent work!";
+        else if (percentage >= 70) message = "Good job, but review the weaker areas.";
+        else message = "You might want to review the study guide again.";
+
+        scoreArea.innerHTML = `Final Score: ${score} / ${questions.length} (${percentage}%)<br><small>${message}</small>`;
+        scoreArea.style.display = 'block';
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    // Initialize
+    loadQuiz();
+
+</script>
+
+</body>
+</html>
